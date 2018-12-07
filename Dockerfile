@@ -9,9 +9,10 @@ RUN apk add --update git bash openssh
 # install azure cli
 RUN apk update && \
 apk add bash py-pip make && \
-apk add --virtual=build gcc libffi-dev musl-dev openssl-dev python-dev && \
-pip install azure-cli && \
-apk del --purge build
+apk add --virtual=build gcc libffi-dev musl-dev openssl-dev python-dev
+RUN pip install --upgrade pip
+RUN pip install azure-cli
+RUN apk del --purge build
 
 ENV TF_DEV=true
 ENV TF_RELEASE=true
